@@ -7,21 +7,21 @@
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="Rénovation Salle de Bain Rivière-Saint-Jean | Douche, Baignoire, Clé en Main | soumission-salledebain.ca">
 <meta property="og:description" content="Rénovez votre salle de bain à Rivière-Saint-Jean avec des experts vérifiés. Obtenez 5 soumissions gratuites sans engagement, réponse en 2h.">
-<meta property="og:image" content="/img/hero-19.jpg">
+<meta property="og:image" content="https://soumission-salledebain.ca/img/hero-19.jpg">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CA">
 <meta property="og:site_name" content="soumission-salledebain.ca">
-<meta property="article:modified_time" content="2026-06-01">
+<meta property="article:modified_time" content="2026-06-10">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Rénovation Salle de Bain Rivière-Saint-Jean | Douche, Baignoire, Clé en Main | soumission-salledebain.ca">
 <meta name="twitter:description" content="Rénovez votre salle de bain à Rivière-Saint-Jean avec des experts vérifiés. Obtenez 5 soumissions gratuites sans engagement, réponse en 2h.">
-<meta name="twitter:image" content="/img/hero-19.jpg">
+<meta name="twitter:image" content="https://soumission-salledebain.ca/img/hero-19.jpg">
 <meta name="geo.region" content="CA-QC">
 <meta name="geo.placename" content="Rivière-Saint-Jean">
 <link rel="canonical" href="https://soumission-salledebain.ca/riviere-saint-jean">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" as="image" href="/img/hero-19.jpg"><title>Rénovation Salle de Bain Rivière-Saint-Jean | Douche, Baignoire, Clé en Main | soumission-salledebain.ca</title>
+<title>Rénovation Salle de Bain Rivière-Saint-Jean | Douche, Baignoire, Clé en Main | soumission-salledebain.ca</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
 <link rel="stylesheet" href="/style.css">
@@ -42,12 +42,7 @@
           "name": "Gaspésie--Îles-de-la-Madeleine (11)"
         }
       },
-      "priceRange": "$$$-$$$$",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.7",
-        "reviewCount": "124"
-      }
+      "priceRange": "$$$-$$$$"
     },
     {
       "@type": "BreadcrumbList",
@@ -1157,6 +1152,119 @@ var _stepLabels = {
   1: "Votre projet salle de bain",  2: "Votre propriété",  3: "Vos coordonnées"};
 
 /* Identifie les champs radio_cards par groupe pour la validation */
+/* IMPORTANT: capturer l'index de la boucle externe avec set AVANT la boucle interne */
+var _radioGroups = [
+    {step: 1, name: "type-travaux", error: "travaux-error"},
+];
+
+function _updateDots(n) {
+  for (var i = 1; i <= _totalSteps; i++) {
+    var dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    if (i < n) {
+      dot.className = 'sb-step-dot w-6 h-6 rounded-full bg-white text-xs font-black flex items-center justify-center';
+      dot.style.color = 'var(--p7)';
+      dot.textContent = '✓';
+    } else if (i === n) {
+      dot.className = 'sb-step-dot w-6 h-6 rounded-full bg-white text-xs font-black flex items-center justify-center';
+      dot.style.color = 'var(--p7)';
+      dot.textContent = i;
+    } else {
+      dot.className = 'sb-step-dot w-6 h-6 rounded-full text-white text-xs font-bold flex items-center justify-center';
+      dot.style.cssText = 'background:rgba(255,255,255,0.25);color:white';
+      dot.textContent = i;
+    }
+    var line = document.getElementById('line-' + i);
+    if (line) line.style.width = (i < n) ? '100%' : '0%';
+  }
+}
+
+function showStep(n) {
+  document.querySelectorAll('.sb-form-step').forEach(function(s) { s.classList.remove('active'); });
+  var target = document.getElementById('step-' + n);
+  if (target) target.classList.add('active');
+  var lbl = document.getElementById('step-label');
+  var pct = document.getElementById('step-pct');
+  if (lbl) lbl.textContent = _stepLabels[n] || 'Confirmation';
+  if (pct) pct.textContent = 'Étape ' + n + ' de ' + _totalSteps;
+  _updateDots(n);
+  _fStep = n;
+}
+
+function nextStep(n) {
+  var current = document.getElementById('step-' + _fStep);
+  if (!current) { showStep(n); return; }
+  var valid = true;
+
+  /* Validation champs texte / select / date */
+  current.querySelectorAll('input[required], select[required], textarea[required]').forEach(function(inp) {
+    if (inp.type === 'radio') return;
+    if (!inp.value.trim()) {
+      valid = false;
+      inp.classList.add('border-red-300', 'ring-1', 'ring-red-300');
+      inp.addEventListener('input', function() {
+        inp.classList.remove('border-red-300', 'ring-1', 'ring-red-300');
+      }, {once: true});
+    }
+  });
+
+  /* Validation groupes radio_cards pour l'étape courante */
+  _radioGroups.forEach(function(rg) {
+    if (rg.step !== _fStep) return;
+    var checked = current.querySelector('input[name="' + rg.name + '"]:checked');
+    if (!checked) {
+      valid = false;
+      if (rg.error) {
+        var errEl = document.getElementById(rg.error);
+        if (errEl) {
+          errEl.classList.remove('hidden');
+          setTimeout(function() { errEl.classList.add('hidden'); }, 3000);
+        }
+      }
+    }
+  });
+
+  if (!valid) return;
+  showStep(n);
+}
+
+function prevStep(n) { showStep(n); }
+
+/* Soumission AJAX Netlify */
+var _form = document.getElementById('empire-form');
+if (_form) {
+  _form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = new FormData(_form);
+    fetch('/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: new URLSearchParams(data).toString()
+    }).then(function() {
+      document.querySelectorAll('.sb-form-step').forEach(function(s) { s.classList.remove('active'); });
+      var merci = document.getElementById('step-merci');
+      if (merci) merci.classList.add('active');
+      _updateDots(_totalSteps + 1);
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'lead_qualifie', {event_category: 'lead', event_label: 'Rivière-Saint-Jean', event_value: 1});
+      }
+    }).catch(function() { _form.submit(); });
+  });
+}
+
+/* Masquer sticky bar au scroll vers le formulaire */
+var _stickyBar = document.getElementById('sticky-bar');
+if (_stickyBar) {
+  var _formEl = document.getElementById('formulaire');
+  window.addEventListener('scroll', function() {
+    if (_formEl) {
+      var rect = _formEl.getBoundingClientRect();
+      _stickyBar.style.display = (rect.top < window.innerHeight && rect.bottom > 0) ? 'none' : '';
+    }
+  }, {passive: true});
+}
+</script></body>
+</html>_cards par groupe pour la validation */
 /* IMPORTANT: capturer l'index de la boucle externe avec set AVANT la boucle interne */
 var _radioGroups = [
     {step: 1, name: "type-travaux", error: "travaux-error"},
