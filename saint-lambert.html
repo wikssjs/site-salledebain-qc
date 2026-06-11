@@ -188,7 +188,7 @@
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold border"
              style="background:var(--p05);color:var(--p7);border-color:var(--p2)">
           <span class="w-2 h-2 rounded-full sb-pulse" style="background:var(--p5)"></span>
-          45 projets salle de bain lancés cette semaine
+          33 projets salle de bain lancés cette semaine
         </div>
 
         <!-- Headline -->
@@ -335,7 +335,7 @@
       </div>
       <div class="flex items-center gap-1.5">
         <span class="w-1.5 h-1.5 rounded-full sb-pulse" style="background:var(--p5)"></span>
-        <span class="text-[11px] font-bold" style="color:var(--p6)">45 projets salle de bain lancés cette semaine</span>
+        <span class="text-[11px] font-bold" style="color:var(--p6)">33 projets salle de bain lancés cette semaine</span>
       </div>
     </div>
     <a href="/devis-salledebain/" target="_blank" rel="noopener sponsored"
@@ -1096,7 +1096,7 @@ Sélectionner le bon entrepreneur pour rénover votre salle de bain à Saint-Lam
         </p>
         <div class="flex items-center gap-2 pt-1">
           <span class="w-2 h-2 rounded-full sb-pulse" style="background:var(--p5)"></span>
-          <span class="text-xs font-semibold" style="color:#475569">45 projets salle de bain lancés cette semaine</span>
+          <span class="text-xs font-semibold" style="color:#475569">33 projets salle de bain lancés cette semaine</span>
         </div>
       </div>
 
@@ -1239,32 +1239,6 @@ if (_form) {
     fetch('/', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: new URLSearchParams(data).toString()
-    }).then(function() {
-      document.querySelectorAll('.sb-form-step').forEach(function(s) { s.classList.remove('active'); });
-      var merci = document.getElementById('step-merci');
-      if (merci) merci.classList.add('active');
-      _updateDots(_totalSteps + 1);
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'lead_qualifie', {event_category: 'lead', event_label: 'Saint-Lambert', event_value: 1});
-      }
-    }).catch(function() { _form.submit(); });
-  });
-}
-
-/* Masquer sticky bar au scroll vers le formulaire */
-var _stickyBar = document.getElementById('sticky-bar');
-if (_stickyBar) {
-  var _formEl = document.getElementById('formulaire');
-  window.addEventListener('scroll', function() {
-    if (_formEl) {
-      var rect = _formEl.getBoundingClientRect();
-      _stickyBar.style.display = (rect.top < window.innerHeight && rect.bottom > 0) ? 'none' : '';
-    }
-  }, {passive: true});
-}
-</script></body>
-</html>ation/x-www-form-urlencoded'},
       body: new URLSearchParams(data).toString()
     }).then(function() {
       document.querySelectorAll('.sb-form-step').forEach(function(s) { s.classList.remove('active'); });

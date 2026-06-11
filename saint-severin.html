@@ -188,7 +188,7 @@
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold border"
              style="background:var(--p05);color:var(--p7);border-color:var(--p2)">
           <span class="w-2 h-2 rounded-full sb-pulse" style="background:var(--p5)"></span>
-          14 projets salle de bain lancés cette semaine
+          10 projets salle de bain lancés cette semaine
         </div>
 
         <!-- Headline -->
@@ -335,7 +335,7 @@
       </div>
       <div class="flex items-center gap-1.5">
         <span class="w-1.5 h-1.5 rounded-full sb-pulse" style="background:var(--p5)"></span>
-        <span class="text-[11px] font-bold" style="color:var(--p6)">14 projets salle de bain lancés cette semaine</span>
+        <span class="text-[11px] font-bold" style="color:var(--p6)">10 projets salle de bain lancés cette semaine</span>
       </div>
     </div>
     <a href="/devis-salledebain/" target="_blank" rel="noopener sponsored"
@@ -1096,7 +1096,7 @@ En Mauricie, la tendance forte privilégie la douche italienne (sans rebord ou d
         </p>
         <div class="flex items-center gap-2 pt-1">
           <span class="w-2 h-2 rounded-full sb-pulse" style="background:var(--p5)"></span>
-          <span class="text-xs font-semibold" style="color:#475569">14 projets salle de bain lancés cette semaine</span>
+          <span class="text-xs font-semibold" style="color:#475569">10 projets salle de bain lancés cette semaine</span>
         </div>
       </div>
 
@@ -1107,7 +1107,7 @@ En Mauricie, la tendance forte privilégie la douche italienne (sans rebord ou d
         </h4>
         <div class="flex flex-wrap gap-x-5 gap-y-2 text-xs leading-loose" style="color:#475569">
           <a href="/la-bostonnais" class="hover:underline transition-colors hover:text-primary-400" style="color:inherit">La Bostonnais</a>
-          <a href="/saint-leon-le-grand" class="hover:underline transition-colors hover:text-primary-400" style="color:inherit">Saint-Léon-le-Grand</a>
+          <a href="/saint-leon-le-grand-mauricie-04" class="hover:underline transition-colors hover:text-primary-400" style="color:inherit">Saint-Léon-le-Grand</a>
           <a href="/saint-edouard-de-maskinonge" class="hover:underline transition-colors hover:text-primary-400" style="color:inherit">Saint-Édouard-de-Maskinongé</a>
           <a href="/saint-etienne-des-gres" class="hover:underline transition-colors hover:text-primary-400" style="color:inherit">Saint-Étienne-des-Grès</a>
           <a href="/yamachiche" class="hover:underline transition-colors hover:text-primary-400" style="color:inherit">Yamachiche</a>
@@ -1245,26 +1245,6 @@ if (_form) {
       var merci = document.getElementById('step-merci');
       if (merci) merci.classList.add('active');
       _updateDots(_totalSteps + 1);
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'lead_qualifie', {event_category: 'lead', event_label: 'Saint-Séverin', event_value: 1});
-      }
-    }).catch(function() { _form.submit(); });
-  });
-}
-
-/* Masquer sticky bar au scroll vers le formulaire */
-var _stickyBar = document.getElementById('sticky-bar');
-if (_stickyBar) {
-  var _formEl = document.getElementById('formulaire');
-  window.addEventListener('scroll', function() {
-    if (_formEl) {
-      var rect = _formEl.getBoundingClientRect();
-      _stickyBar.style.display = (rect.top < window.innerHeight && rect.bottom > 0) ? 'none' : '';
-    }
-  }, {passive: true});
-}
-</script></body>
-</html>  _updateDots(_totalSteps + 1);
       if (typeof gtag !== 'undefined') {
         gtag('event', 'lead_qualifie', {event_category: 'lead', event_label: 'Saint-Séverin', event_value: 1});
       }

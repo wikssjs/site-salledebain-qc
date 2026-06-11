@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /devis-salledebain/
-Crawl-delay: 3
 
 Sitemap: https://soumission-salledebain.ca/sitemap-index.xml
